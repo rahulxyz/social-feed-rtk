@@ -2,17 +2,19 @@ import { nanoid } from "@reduxjs/toolkit";
 import { postAdded, type Post } from "./postsSlice";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { selectAllUsers } from "../users/usersSlice";
+import { selectCurrentUsername } from "../auths/authSlice";
 
 export const AddPostForm = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector(selectAllUsers);
+  const userId = useAppSelector(selectCurrentUsername)!
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(event.currentTarget);
     const formData = new FormData(event.currentTarget);
     const title = formData.get("postTitle") as string;
     const content = formData.get("postContent") as string;
-    const userId = formData.get("postAuthor") as string;
+   // const userId = formData.get("postAuthor") as string;
 
     const newPost: Post = {
       id: nanoid(),
