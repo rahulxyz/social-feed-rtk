@@ -5,11 +5,12 @@ export interface Post {
   id: string;
   title: string;
   content: string;
+  user: string;
 }
 
 const initialState: Post[] = [
-  { id: "1", title: "user1", content: "User1 says hi." },
-  { id: "2", title: "user2", content: "User2 says hey." },
+  { id: "1", title: "user1", content: "User1 says hi.", user: '0' },
+  { id: "2", title: "user2", content: "User2 says hey.", user: '1'  },
 ];
 
 const postSlice = createSlice({
