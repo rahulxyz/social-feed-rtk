@@ -1,6 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
-import { PostsList } from "./features/posts/postsList";
+import { AddPostForm } from "@/features/posts/AddPostForm";
+import { PostsList } from "@/features/posts/postsList";
+
 
 function App() {
 
@@ -13,6 +15,7 @@ function App() {
             path="/"
             element={
               <>
+              <AddPostForm/>
                 <PostsList />
               </>
             }
