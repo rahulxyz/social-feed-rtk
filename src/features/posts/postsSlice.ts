@@ -1,3 +1,4 @@
+import type { RootState } from "@/app/store";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface Post {
@@ -15,12 +16,32 @@ const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    postAdded: (state, action: PayloadAction<Post>)=>{
-        state.push(action.payload);
-    }
+    postAdded: (state, action: PayloadAction<Post>) => {
+      state.push(action.payload);
+    },
+    postUpdated(state, action: PayloadAction<Post>) {
+      const { id, title, content } = action.payload;
+      const existingPost = state.find((post) => post.id === id);
+      if (existingPost) {
+        existingPost.title = title;
+        existingPost.content = content;
+      }
+    },
+  },
+  selectors: {
+    selectAllPosts: (postsState) => postsState,
+    selectPostById: (postsState, postId: string) => {
+      return postsState.find((post) => post.id === postId);
+    },
   },
 });
 
-export const {postAdded} = postSlice.actions;
+export const { postAdded, postUpdated } = postSlice.actions;
+export const { selectAllPosts, selectPostById } = postSlice.selectors;
 
 export default postSlice.reducer;
+
+// export const selectAllPosts = (state: RootState) => state.posts
+
+// export const selectPostById = (state: RootState, postId: string) =>
+//   state.posts.find(post => post.id === postId)
