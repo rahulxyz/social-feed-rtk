@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { postUpdated, selectPostById } from "./postsSlice";
+import { selectCurrentUsername } from "../auths/authSlice";
 
 // omit form element types
 
@@ -13,6 +14,7 @@ export const EditPostForm = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const userId = useAppSelector(selectCurrentUsername)!;
 
   if (!post) {
     return (
@@ -31,7 +33,7 @@ export const EditPostForm = () => {
     const content = formData.get("postContent") as string;
 
     if (title && content) {
-      dispatch(postUpdated({ id: post.id, title, content }));
+      dispatch(postUpdated({ id: post.id, title, content, user: userId }));
       navigate(`/posts/${postId}`);
     }
   };

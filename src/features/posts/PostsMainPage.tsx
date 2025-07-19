@@ -1,4 +1,4 @@
-import { PostsList } from './postsList'
+import { PostsList } from './PostsList'
 import { AddPostForm } from './AddPostForm'
 
 export function PostsMainPage() {
