@@ -28,12 +28,12 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/posts" element={<PostsMainPage />} />
           <Route
             path="/*"
             element={
               <ProtectedRoute>
                 <Routes>
-                  <Route path="/posts" element={<PostsMainPage />} />
                   <Route path="/posts/:postId" element={<SinglePostPage />} />
                   <Route path="/editPost/:postId" element={<EditPostForm />} />
                 </Routes>
